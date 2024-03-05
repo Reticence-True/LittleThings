@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机色色卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            background: #E3F2FD;
+        }
+
+        .container {
+            width: 80vw;
+            margin: 100px auto;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .card-container .card {
+            width: 23vmin;
+            height: calc(23vmin + 50px);
+            background: #fff;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .card-container .card .color{
+            width: 23vmin;
+            height: 23vmin;
+            background: #000;
+            border-radius: 5px;
+        }
+
+        .card-container .card .hex-color {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .control-button{
+            width: fit-content; /* 让div宽度自适应文字 */
+            height: 5vmin;
+            font-size: 2rem;
+            color: #fff;
+            line-height: 5vmin;
+            background: #8A6BF4;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 45px auto;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .control-button:hover {
+            background: #977af7;
+        }
+
+        .control-button:active {
+            background: #8A6BF4;
+        }
+
+        @keyframes magnification {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="card-container">
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color">#000000</div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+        </ul>
+        <ul class="card-container">
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+            <li class="card">
+                <div class="color"></div>
+                <div class="hex-color"></div>
+            </li>
+        </ul>
+        <div class="control-button">Refresh Palette</div>
+    </div>
+
+    <script>
+        let cardList = document.querySelectorAll(".card");
+        let controlButton = document.querySelector(".control-button")
+        
+        function changePalette(obj, hexColor){
+            let colorCard = obj.children[0];
+            let colorText = obj.children[1];
+
+            colorText.innerText = hexColor;
+            colorCard.style.backgroundColor = hexColor;
+        }
+
+        function getPalette(){
+            var delay = 0;
+            cardList.forEach(e => {
+                let hexColor = "#";
+                for(let i = 0; i < 6; i++){
+                    let hexColorBit = Math.floor(Math.random()*16).toString(16).toUpperCase();
+                    hexColor = hexColor + hexColorBit
+                }
+                changePalette(e, hexColor)
+            })
+            delay = null
+        }
+
+        controlButton.addEventListener("click", () => {
+            getPalette()
+        })
+
+        document.addEventListener("keypress", (e) => {
+            if(e.key === "R" || e.key === "r"){
+                getPalette()
+            }
+        })
+
+        getPalette()
+
+    </script>
+</body>
+
+</html>

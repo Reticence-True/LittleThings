@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹性球加载动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ball-color1-from: #fad0c4;
+            --ball-color1-to: #ff9a9e;
+            --ball-color2-from: #c2e9fb;
+            --ball-color2-to: #a1c4fd;
+            --ball-color3-from: #d4fc79;
+            --ball-color3-to: #96e6a1;
+        }
+
+        .ball-container {
+            width: 725px;
+            height: 250px;
+            margin: 200px auto;
+            margin-bottom: 0;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .ball-container .ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .shadow-container {
+            width: 725px;
+            margin: 0 auto;
+            margin-bottom: 0;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .shadow-container .shadow {
+            width: 50px;
+            height: 10px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .ball1 {
+            background: linear-gradient(to bottom, var(--ball-color1-from), var(--ball-color1-to));
+            animation: ballsFalling ease-in 1s infinite alternate;
+            animation-delay: 0s;
+        }
+
+        .ball2 {
+            background: linear-gradient(to bottom, var(--ball-color2-from), var(--ball-color2-to));
+            animation: ballsFalling ease-in 1s infinite alternate;
+            animation-delay: .5s;
+        }
+
+        .ball3 {
+            background: linear-gradient(to bottom, var(--ball-color3-from), var(--ball-color3-to));
+            animation: ballsFalling ease-in 1s infinite alternate;
+            animation-delay: 1s;
+        }
+
+        .shadow1 {
+            animation: ballsShadow 1s ease-in infinite alternate;
+        }
+
+        .shadow2 {
+            animation: ballsShadow 1s ease-in infinite alternate;
+            animation-delay: .5s;
+        }
+
+        .shadow3 {
+            animation: ballsShadow 1s ease-in infinite alternate;
+            animation-delay: 1s;
+        }
+
+        @keyframes ballsFalling {
+            0% {
+                top: 10%;
+            }
+
+            100% {
+                top: calc(100% - 50px);
+            }
+        }
+
+        @keyframes ballsShadow {
+            0% {
+                transform: scale(1);
+                background: rgba(0, 0, 0, .5);
+            }
+
+            100% {
+                transform: scale(0.4, 0.5);
+                background: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="ball-container">
+            <div class="ball1 ball"></div>
+            <div class="ball2 ball"></div>
+            <div class="ball3 ball"></div>
+        </div>
+        <div class="shadow-container">
+            <div class="shadow1 shadow"></div>
+            <div class="shadow2 shadow"></div>
+            <div class="shadow3 shadow"></div>
+        </div>
+    </div>
+</body>
+
+</html>

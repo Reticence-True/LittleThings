@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Login3</title>
+    <style>
+        html {
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+        body {
+            background-image: url("./desktop.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-align: center;
+        }
+        .container {
+            width: 100rem;
+            height: 50rem;
+            background: inherit;
+            border-radius: 2rem;
+            box-shadow: 3.5px 3.5px 15px rgba(0,0,0,.3);
+            margin: 7rem auto;
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+        }
+        p {
+            font-size: 50px;
+            margin-top: 1.7em;
+        }
+        button {
+            width: 16.5rem;
+            height: 4.5rem;
+            font-size: 20px;
+            color: #fff;
+            border: none;
+            border-radius: 1.5rem;
+            background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+            position: absolute;
+            top: 22rem;
+            z-index: -1;
+            box-sizing: border-box;
+        }
+        button:active {
+            width: 16.4rem;
+            height: 4.4rem;
+        }
+        input {
+            width: 80%;
+            height: 8%;
+            font-size: 20px;
+            border: none;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            outline: none;
+        }
+        .signup {
+            width: 50%;
+            height: 100%;
+            background-color: #e9e9e9;
+            border-radius: inherit;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            float: left;
+            overflow: hidden;
+            transform: translateX(-100%);
+            transition: all .5s ease;
+        }
+        .submit {
+            width: 16.5rem;
+            height: 4.5rem;
+            color: #fff;
+            border-radius: 1.5rem;
+            background-image: linear-gradient(90deg, #0367a6 0%, #008997 74%);
+            padding: 0;
+            margin-top: 5rem;
+        }
+        .signupBtn{
+            left: 16.5rem;
+            cursor: pointer;
+            transform: translateX(0);
+            transition: transform .5s ease;
+        }
+        .signupBtn:active{
+            left: 16.6rem;
+        }
+
+        .login {
+            width: 50%;
+            height: 100%;
+            background-color: #e9e9e9;
+            border-radius: inherit;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            transform: translateX(0);
+            float: right;
+            transition: all .5s ease;
+        }
+        .loginBtn {
+            right: 16.5rem;
+            cursor: pointer;
+            transform: translateX(35rem);
+            transition: transform .5s ease;
+        }
+        .loginBtn:active {
+            right: 16.6rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signup">
+            <p>Sign Up</p>
+            <input type="text" placeholder="Username">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input class="submit" type="submit" value="Sign Up">
+        </div>
+        <div class="left-overlay">
+            <button class="signupBtn">Sign up</button>
+        </div>
+        <div class="login">
+            <p>Log In</p>
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input class="submit" type="submit" value="Log In">
+            <h3><a href="javascript:;" style="color: #000; text-decoration: none;">Forget your password?</a></h3>
+        </div>
+        <div class="right-overlay">
+            <button class="loginBtn">Log in</button>
+        </div>
+    </div>
+
+    <script>
+        let signup = document.querySelector(".signup")
+        let signupBtn = document.querySelector(".signupBtn")
+        let login = document.querySelector(".login")
+        let loginBtn = document.querySelector(".loginBtn")
+        
+        signupBtn.addEventListener("click", function(){
+            signup.style.transform = "translateX(0)"
+            login.style.transform = "translateX(100%)"
+            signupBtn.style.transform = "translateX(-35rem)"
+            loginBtn.style.transform = "translateX(0)"
+        })
+
+        loginBtn.addEventListener("click", function(){
+            signup.removeAttribute("style")
+            login.removeAttribute("style")
+            signupBtn.removeAttribute("style")
+            loginBtn.removeAttribute("style")
+        })
+
+    </script>
+</body>
+</html>

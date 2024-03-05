@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打字机</title>
+    <style>
+        :root {
+            --text-color: #ff4500;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 60vw;
+            margin: 80px auto;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .line {
+            display: flex;
+        }
+
+        .text {
+            font-size: 3rem;
+            color: var(--text-color);
+        }
+
+        .input-line {
+            width: 1px;
+            height: 50px;
+            background: var(--text-color);
+            margin: 0 5px;
+            margin-top: 5px;
+            align-self: center;
+        }
+
+        .choose-color {
+            margin: 20px 0;
+            display: flex;
+        }
+
+        .choose-color span:nth-child(1){
+            font-weight: bold;
+            font-size: large;
+        }
+        .choose-color input {
+            background: transparent;
+            border: none;
+            box-sizing: border-box;
+        }
+        .choose-color span:nth-child(3){
+            color: var(--text-color);
+            font-weight: bold;
+            padding-left: 5px;
+            align-self: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="choose-color">
+            <span>文字颜色：</span>
+            <input class="color-select" type="color">
+            <span class="HEXcolor">#ff4500</span>
+        </div>
+        <div class="line">
+            <span class="text"></span>
+            <span class="input-line" style="display: inline-block;"></span>
+        </div>
+    </div>
+
+    <script>
+        const text = document.querySelectorAll(".text")[0]
+        const inputLine = document.querySelector(".input-line")
+        const colorSelector = document.querySelector(".color-select")
+        const HEXcolor = document.querySelector(".HEXcolor")
+        let lineDisplay = true
+        let index = 0
+        // 初始化文字颜色
+        colorSelector.value = "#ff4500"
+        // 输出文字速度
+        let speed = 300
+        // 删除文字速度
+        let delSpeed = 50
+        // 文字区内容
+        let textString = `你好 How are you?`
+        // 文字输入线闪烁
+        setInterval(() => {
+            if (lineDisplay) {
+                inputLine.style.display = "none"
+                lineDisplay = false
+            }
+            else {
+                inputLine.style.display = "inline-block"
+                lineDisplay = true
+            }
+        }, 600)
+        // 单字列表逐个打出
+        function typer() {
+            let timer = setInterval(() => {
+                text.innerHTML = textString.slice(0, index)
+                index++
+                if (index >= textString.length) {
+                    clearInterval(timer)
+                    delTyper()
+                }
+            }, speed);
+        }
+        // 清空所有文字
+        function delTyper() {
+            let timer2 = setInterval(() => {
+                index--
+                text.innerHTML = textString.slice(0, index)
+                if (index === 0) {
+                    clearInterval(timer2)
+                    typer()
+                }
+            }, delSpeed);
+        }
+        // 修改打印文字颜色
+        colorSelector.addEventListener("input", changePrintColor)  // 每次改变会触发input事件
+        function changePrintColor() {
+            document.documentElement.style.setProperty("--text-color", this.value)
+            // 修改hexcolor文字和颜色
+            HEXcolor.innerHTML = this.value
+            HEXcolor.style.color = this.value
+        }
+
+        typer()
+
+    </script>
+
+</body>
+
+</html>

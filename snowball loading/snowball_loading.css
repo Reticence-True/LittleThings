@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    background: #E7EDFE;
+}
+
+.box {
+    width: 30vmin;
+    height: 30vmin;
+    position: relative;
+}
+
+.box .ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 -1vmin 0.8vmin rgba(0, 0, 0, 0.15),
+        inset 0 1vmin 1.5vmin rgba(0, 0, 0, 0.15),
+        0 0.75vmin 1vmin rgba(255, 255, 255, 0.4),
+        inset 0 -1vmin 1.25vmin rgba(255, 255, 255, 0.4);
+    position: absolute;
+}
+
+.box .ring::before {
+    content: "";
+    inset: 11%;
+    border-radius: 50%;
+    box-shadow: 0 -0.75vmin 1vmin rgba(255, 255, 255, 0.4),
+        inset 0 1vmin 1.25vmin rgba(255, 255, 255, 0.4),
+        0 1vmin 0.8vmin rgba(0, 0, 0, 0.15),
+        inset 0 -1vmin 1.25vmin rgba(0, 0, 0, 0.15);
+    position: absolute;
+}
+
+.box .ring::after {
+    content: "";
+    inset: -10%;
+    background: conic-gradient(#e7edfe, 150deg, transparent 250deg);
+    position: absolute;
+
+    animation: mask 5s linear infinite;
+}
+
+@keyframes mask {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.ball {
+    width: 5.5vmin;
+    height: 5.5vmin;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: calc(50% - 2.75vmin);
+    left: calc(50% - 2.75vmin);
+    transform: rotate(0) translateY(-13.5vmin);
+
+    animation: ball 5s linear infinite;
+}
+
+@keyframes ball {
+    0% {
+        width: 5.5vmin;
+        height: 5.5vmin;
+        transform: rotate(0) translateY(-13.5vmin);
+    }
+
+    50% {
+        width: 7.5vmin;
+        height: 7.5vmin;
+        transform: rotate(180deg) translateY(-13vmin);
+    }
+
+    100% {
+        width: 5.5vmin;
+        height: 5.5vmin;
+        transform: rotate(360deg) translateY(-13.5vmin);
+    }
+
+}
+
+.ball .texture {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+.ball .texture::before {
+    content: "";
+    width: 200%;
+    height: 100%;
+    background: url(./image/snow.jpg);
+    background-size: 50% 100%;
+    filter: brightness(1.05);
+    position: absolute;
+    right: 0;
+    animation: texture 0.5s linear infinite;
+}
+
+@keyframes texture {
+    100% {
+        transform: translateX(50%);
+    }
+}
+
+.ball .shadow {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow:
+        0 0.1vmin 0.75vmin rgba(0, 0, 0, 0.3),
+        inset 0 0 0.75vmin rgba(0, 0, 0, 0.1),
+        inset 0 -1vmin 1vmin rgba(0, 0, 0, 0.15);
+
+    position: absolute;
+    top: 0;
+
+    animation: shadow 5s linear infinite;
+}
+
+@keyframes shadow {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.loading-text {
+    font-size: 3.8vmin;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(to bottom, #00BFFF, #1E90FF);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -o-background-clip: text;
+    text-align: center;
+    position: absolute;
+}

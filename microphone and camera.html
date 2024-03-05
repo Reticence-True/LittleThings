@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调用麦克风和摄像头</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        video {
+            width: 100vw;
+            height: calc(100vh - 80px);
+            border: 1px solid #000;
+        }
+
+        .btn-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        button {
+            width: 200px;
+            height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <video src=""></video>
+        <div class="btn-container">
+            <button id="video-on">开启摄像头</button>
+            <button id="video-off">关闭摄像头</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const mediaDevices = navigator.mediaDevices
+            const video = document.querySelector("video")
+            const btnOn = document.querySelector("#video-on")
+            const btnOff = document.querySelector("#video-off")
+            // 设置媒体流的依赖项
+            const constraints = window.constraints = {
+                // #region
+                /* 
+                    其中有两个属性：
+                        video 
+                            - 指定视频的规则，默认为true
+                            - 可以传入一个对象指定摄像头分辨率
+                                // 固定大小
+                                {
+                                    width: 1280,
+                                    height: 720
+                                }
+                                // 限制最小、最佳和最大大小
+                                {
+                                    width: { min: 1024, ideal: 1280, max: 1920 },
+                                    height: { min: 720, ideal: 776, max: 1080 }
+                                }
+                                // 调用前置摄像头
+                                {facingMode: "user"}
+                                // 调用后置摄像头
+                                {facingMode: {exact: "environment"}}
+
+                        audio 
+                            - 指定音频的规则，默认为true
+                */
+                // #endregion
+
+                video: false,
+                audio: false
+            }
+            async function mediaStreamFunction() {
+                try {
+                    let mediaStream = await mediaDevices.getUserMedia(constraints)
+                    console.log(mediaStream);
+                    video.srcObject = mediaStream
+                    video.onloadedmetadata = function () {
+                        video.play()
+                    }
+                } catch (e) {
+                    console.log(e.message);
+                }
+            }
+
+            btnOn.addEventListener("click", () => {
+                constraints.video = {
+                    width: { min: 1024, ideal: 1280, max: 1920 },
+                    height: { min: 720, ideal: 776, max: 1080 }
+                }
+                mediaStreamFunction()
+            })
+            btnOff.addEventListener("click", () => {
+                constraints.video = false
+                mediaStreamFunction()
+            })
+        }
+
+    </script>
+</body>
+
+</html>

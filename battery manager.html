@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电池管理</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>电池管理</h1>
+        <div>
+            <h2>
+                电池电量:
+                <span id="level"></span>
+            </h2>
+        </div>
+        <div>
+            <h2>
+                充电状态:
+                <span id="charging"></span>
+            </h2>
+        </div>
+        <div>
+            <h2>
+                剩余充电时间:
+                <span id="charging-time"></span>
+            </h2>
+        </div>
+        <div>
+            <h2>
+                电池可用预计时间:
+                <span id="discharging-time"></span>
+            </h2>
+        </div>
+    </div>
+
+    <noscript>您的浏览器不支持script</noscript>
+    <script>
+        window.onload = function () {
+            let container = document.querySelector("#container")
+            let charging = document.querySelector("#charging")
+            let chargingTime = document.querySelector("#charging-time")
+            let dischargingTime = document.querySelector("#discharging-time")
+            let level = document.querySelector("#level")
+
+                ; (async () => {
+                    try {
+                        const batteryManager = await navigator.getBattery()
+
+                        // 充电状态
+                        chargingState(charging, batteryManager)
+                        // 充电状态事件
+                        batteryManager.addEventListener("chargingchange", () => {
+                            chargingState(charging, batteryManager)
+                        })
+
+                        // 剩余充电时间
+                        chargingTimeFunction(chargingTime, batteryManager)
+                        // 剩余充电时间事件
+                        batteryManager.addEventListener("chargingtimechange", () => {
+                            chargingTimeFunction(chargingTime, batteryManager)
+                        })
+
+                        // 电池可用预计时间
+                        dischargingTimeFunction(dischargingTime, batteryManager)
+                        // 电池可用预计时间事件
+                        batteryManager.addEventListener("dischargingtimechange", () => {
+                            dischargingTimeFunction(dischargingTime, batteryManager)
+                        })
+
+                        // 电池电量
+                        level.innerText = batteryManager.level * 100 + "%"
+                        // 电池电量变化事件
+                        batteryManager.addEventListener("levelchange", () => {
+                            level.innerText = batteryManager.level * 100 + "%"
+                        })
+
+                    } catch (e) {
+                        container.innerText = "您的浏览器不支持电池管理功能"
+                    }
+
+
+                })()
+
+            // 充电状态函数
+            function chargingState(obj, batteryManager) {
+                let chargingStatus = batteryManager.charging
+                if (chargingStatus) {
+                    obj.innerText = "充电中"
+                } else {
+                    obj.innerText = "未充电"
+                }
+            }
+
+            // 剩余充电时间函数
+            function chargingTimeFunction(obj, batteryManager) {
+                let chargingTime = batteryManager.chargingTime
+                if (chargingTime === 0) {
+                    obj.innerText = "已充满"
+                } else if (chargingTime === Infinity) {
+                    obj.innerText = "未知"
+                } else {
+                    let hour = 0, minute = 0, second = 0
+                    let formatChargingTime
+
+                    minute = parseInt(dischargingTime / 60)
+                    hour = parseInt(minute / 60)
+                    minute = minute - hour * 60
+
+                    formatChargingTime = hour + "时" + minute + "分"
+                    obj.innerText = formatChargingTime
+                }
+            }
+
+            // 电池可用预计时间函数
+            function dischargingTimeFunction(obj, batteryManager) {
+                let dischargingTime = batteryManager.dischargingTime
+                if (dischargingTime === Infinity) {
+                    obj.innerText = "未知"
+                } else {
+                    let hour = 0, minute = 0, second = 0
+                    let formatDischargingTime
+
+                    minute = parseInt(dischargingTime / 60)
+                    hour = parseInt(minute / 60)
+                    minute = minute - hour * 60
+
+                    formatDischargingTime = hour + "时" + minute + "分"
+
+                    obj.innerText = formatDischargingTime
+                }
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

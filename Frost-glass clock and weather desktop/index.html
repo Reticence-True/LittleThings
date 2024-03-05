@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛玻璃桌面时钟和天气</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./index.css">
+    <link rel="shortcut icon" href="./images/icons8-relógio-48.png">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://webapi.amap.com/loader.js"></script>
+    <script type="module" src="./index.js" defer></script>
+
+    <!-- <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script>
+    var cityCode=returnCitySN.cid;
+    console.log('<hr><br><h1> 老铁位置：'+JSON.stringify(returnCitySN)+'</h1>');
+</script> -->
+
+</head>
+<body>
+    <div class="container">
+        <div class="clock-box">
+            <div class="clock">
+                <div class="hour">
+                    <div class="hr" id="hr"></div>
+                </div>
+                <div class="min">
+                    <div class="mn" id="mn"></div>
+                </div>
+                <div class="sec">
+                    <div class="sc" id="sc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weather-box">
+        <div class="weather">
+            <div class="weather-icon"></div>
+            <ul class="weather-other-info">
+                <li class="city-li">
+                    <div class="city" title=""></div>
+                    <div class="locate" title="点击重新定位"><i class="fa fa-map-marker"></i></div>
+                </li>
+                <li class="wea-curtemp-li">
+                    <span class="wea-text"></span>
+                    <span class="curr-temp"></span>℃
+                </li>
+                <li class="wind-li">
+                    <span class="wind-direction"></span>风
+                    <span class="wind-level"></span>级
+                </li>
+                <li class="date-li">
+                    <p><span class="date">年月日</span></p>
+                    <p><span class="lunar-date">农历年月日</span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

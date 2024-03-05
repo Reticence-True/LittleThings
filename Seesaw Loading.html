@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载动画：跷跷板</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #000;
+        }
+
+        .container {
+            width: 500px;
+            height: 200px;
+            margin: 100px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .move-container {
+            animation: seesaw 2s ease-in-out alternate infinite;
+            z-index: 999;
+        }
+
+        .rolling-ball {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            position: relative;
+            /* 加入滚动动画 */
+            animation: ball-rolling 2s ease-in-out alternate infinite;
+        }
+
+        .rolling-ball::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 15px;
+        }
+
+        .balance-plate {
+            width: 200px;
+            height: 8px;
+            background: #fff;
+        }
+
+        .triangle-bracepoint {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .triangle-bracepoint::before {
+            content: "";
+            width: 21px;
+            height: 21px;
+            position: absolute;
+            top: -1px;
+            left: -100%;
+            background: #000;
+            transform: rotateZ(25deg);
+            transform-origin: right bottom;
+        }
+
+        .triangle-bracepoint::after {
+            content: "";
+            width: 21px;
+            height: 21px;
+            position: absolute;
+            top: -1px;
+            left: 100%;
+            background: #000;
+            transform: rotateZ(-25deg);
+            transform-origin: left bottom;
+        }
+        .text {
+            color: #fff;
+            letter-spacing: 2px;
+            line-height: 3;
+        }
+
+        @keyframes ball-rolling {
+            0%{
+                transform: translateX(0) rotateZ(0deg);
+            }
+            100% {
+                transform: translateX(400%) rotateZ(360deg);
+            }
+        }
+
+        @keyframes seesaw {
+            0% {
+                transform: rotateZ(10deg);
+            }
+
+            100% {
+                transform: rotateZ(-10deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="move-container">
+            <div class="rolling-ball"></div>
+            <div class="balance-plate"></div>
+        </div>
+        <div class="triangle-bracepoint"></div>
+        <div class="text">loading...</div>
+    </div>
+</body>
+
+</html>

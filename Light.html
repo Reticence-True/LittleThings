@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会变色的灯</title>
+    <style>
+        :root {
+            --light-color: #fff;
+            --toggle-color: #828282;
+            --toggle-head-color: #dedede;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background: #222;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        .bulb-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wire {
+            width: 4px;
+            height: calc(50% - 20px);
+            background: #8f8e8e;
+            position: absolute;
+            top: 0;
+        }
+
+        .bulb {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--light-color);
+            position: relative;
+        }
+
+        .bulb::before {
+            content: "";
+            width: 35px;
+            height: 40px;
+            border-top: 30px solid #000;
+            border-radius: 8px;
+            background-color: var(--light-color);
+            position: absolute;
+            left: 23px;
+            top: -50px;
+        }
+
+        .bulb::after {
+            content: "";
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--light-color);
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            filter: blur(40px);
+            transform: translate(-20%, -35%);
+            box-shadow:
+                0 0 10px var(--light-color),
+                0 0 30px var(--light-color),
+                0 0 60px var(--light-color),
+                0 0 90px var(--light-color),
+                0 0 120px var(--light-color),
+                0 0 150px var(--light-color);
+        }
+
+        .bulb span:nth-child(n) {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: -16px;
+        }
+
+        .bulb span:nth-child(1) {
+            left: -3px;
+            background: transparent;
+            border-bottom-right-radius: 40px;
+            transform: rotateZ(-17deg);
+            box-shadow: 20px 20px 0 10px var(--light-color);
+        }
+
+        .bulb span:nth-child(2) {
+            right: -3.4px;
+            background: transparent;
+            border-bottom-left-radius: 40px;
+            transform: rotateZ(16deg);
+            box-shadow: -20px 20px 0 10px var(--light-color);
+        }
+
+        .controller {
+            width: 20%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        .switch {
+            width: 45px;
+            height: 18px;
+            border-radius: 20px;
+            background: var(--toggle-color);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .switch.on::before {
+            left: 60% !important;
+        }
+
+        .switch::before {
+            content: "";
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 200ms ease;
+        }
+
+        .color-selected {
+            color: #fff;
+        }
+
+        .color {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bulb-container">
+            <div class="wire"></div>
+            <div class="bulb">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="controller">
+            <div class="switch on"></div>
+            <div class="color-selected">
+                <input type="color" class="color">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isOn = true
+
+        const Switch = document.querySelector(".switch")
+        const bulb = document.querySelector(".bulb")
+        const colorTable = document.querySelector(".color")
+
+        // 获取灯泡初始颜色，并将其置于色盘中
+        colorTable.setAttribute("value", "#ffffff")
+
+        colorTable.addEventListener("input", function(){
+            // 获取色盘颜色值（16进制）
+            let color = this.value
+            // 灯开，改变灯的颜色
+            if(isOn) changeBulbColor(color)
+        })
+        
+
+        // 灯泡开关
+        Switch.addEventListener("click", function () {
+            isOn = !isOn
+            this.classList.toggle("on")
+            // 灯开，获取色盘颜色置为灯的颜色
+            if (isOn) changeBulbColor(colorTable.value)
+            else changeBulbColor("#5a5a5a")
+        })
+
+        // 改变灯泡颜色
+        function changeBulbColor(color) {
+            // 改变 --light-color 变量的值
+            document.documentElement.style.setProperty("--light-color", color)
+        }
+
+    </script>
+</body>
+
+</html>

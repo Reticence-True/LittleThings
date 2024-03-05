@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环形进度条</title>
+    <style>
+        :root {
+            --color: #7d2ae8;
+            --progress-bgcolor: #ededed;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: var(--color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 420px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 30px;
+        }
+
+        .circular-progress {
+            height: 250px;
+            width: 250px;
+            /* 设置 */
+            background: conic-gradient(var(--color) 0deg, var(--progress-bgcolor) 0deg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .circular-progress::before {
+            content: "";
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+        }
+
+        .progress-percent {
+            font-size: 55px;
+            font-weight: bold;
+            color: var(--color);
+            position: absolute;
+        }
+        .complete {
+            font-size: 150px;
+            font-weight: bold;
+            color: var(--color);
+            position: absolute;
+            transition: all 400ms ease;
+            opacity: 0;
+        }
+
+        .text {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="circular-progress">
+            <span class="progress-percent" style="opacity: 100;"></span>
+            <!-- 加载完成对勾 -->
+            <span class="complete">&checkmark;</span>
+        </div>
+
+        <span class="text">HTML&CSS</span>
+    </div>
+    <script>
+        let progress = document.querySelector(".circular-progress")
+        let progressPercent = document.querySelector(".progress-percent")
+        let progressComplete = document.querySelector(".complete")
+        let progressStartValue = 0
+        let progressEndValue = 100
+        let speed = 80
+
+        const timer = setInterval(() => {
+            if(progressStartValue === progressEndValue){
+                clearInterval(timer)
+                progressPercent.style.opacity = 0
+                progressComplete.style.opacity = 100
+            }
+            progressStartValue++
+            progressPercent.innerHTML = progressStartValue + "%"
+            progress.style.background = `conic-gradient(#7d2ae8 ${3.6*progressStartValue}deg, #ededed 0deg)`
+        }, speed)
+
+    </script>
+</body>
+
+</html>

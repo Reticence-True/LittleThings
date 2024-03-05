@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可拖拽排序列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .item {
+            height: 50px;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #fff;
+            border-radius: 5px;
+            background: green;
+            border: 1px solid transparent;
+            padding-left: 10px;
+            margin: 20px 50px;
+            user-select: none;
+        }
+
+        .dragging {
+            background: #fff;
+            border: 1px dashed green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="list">
+            <li draggable="true" class="item">1</li>
+            <li draggable="true" class="item">2</li>
+            <li draggable="true" class="item">3</li>
+            <li draggable="true" class="item">4</li>
+            <li draggable="true" class="item">5</li>
+        </ul>
+    </div>
+
+    <script>
+        var list = document.querySelector(".list")
+        var children = Array.from(list.children)
+        var draggedElem = void 0
+
+        list.addEventListener("dragstart", function (e) {
+            draggedElem = e.target
+            setInterval(() => {
+                e.target.classList.add("dragging")
+            });
+            return
+        })
+
+        list.addEventListener("dragenter", function (e) {
+            if (e.target !== list && e.target !== document && e.target !== draggedElem) {
+                if (children.indexOf(draggedElem) > children.indexOf(e.target)) {
+                    list.insertBefore(draggedElem, e.target)
+                }
+                else{
+                    list.insertBefore(draggedElem, e.target.nextSibling)
+                }
+            }
+        })
+
+        list.addEventListener("dragend", function (e) {
+            setInterval(() => {
+                e.target.classList.remove("dragging")
+            });
+            children = Array.from(list.children)
+        })
+
+    </script>
+</body>
+
+</html>

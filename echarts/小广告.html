@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小广告</title>
+    <style>
+        .ads{ 
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+        }
+
+    </style>
+</head>
+<body style="background-color: #000;">
+    <div class="container">
+        <img src="./ads1.jpg" alt="ad1" class="ads">
+    </div>
+    <script>
+        const imgArr = ["./ads1.jpg", "./ads2.jpg", "./ads3.jpg", "./ads4.jpg"]
+        let img = document.querySelector("img")
+        let index = 0
+        setInterval(() => {
+            index++
+            if(index > 3) index = 0
+            img.src = imgArr[index]
+        }, 5000);
+    </script>
+</body>
+</html>

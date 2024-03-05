@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瞬时水果销量</title>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="bar" style="width: 700px; height:400px;"></div>
+        <div id="pie" style="width: 700px; height:400px;"></div>
+    </div>
+
+    <script>
+        // #region 柱状图 + 折线图
+        var barCharts = echarts.init(document.getElementById("bar"))
+        var barOptions = {
+            title: {
+                text: "水果销量(柱状图 + 折线图)"
+            },
+            tooltip: {},
+            legend: {
+                data: ["水果销量(柱)"]
+            },
+            xAxis: {
+                data: ["苹果", "香蕉", "草莓", "梨", "橘子", "菠萝"]
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: "水果销量(柱)",
+                    type: "line",
+                    label: {
+                        show: true,
+                        position: "top"
+                    }
+                }
+                // {
+                //     name: "水果销量(折线)",
+                //     type: "line"
+                // }
+            ],
+            // animation: false
+        }
+        // #endregion
+
+        // #region 饼状图
+        var pieCharts = echarts.init(document.getElementById("pie"))
+        var pieOptions = {
+            title: {
+                text: "水果销量(饼状图)"
+            },
+            tooltip: {},
+            series: {
+                type: "pie",
+            }
+        }
+        // #endregion
+
+        // #region 设置函数们
+        function setSaleData(){
+            return [
+            Math.floor(Math.random()*100%100),
+            Math.floor(Math.random()*100%100),
+            Math.floor(Math.random()*100%100),
+            Math.floor(Math.random()*100%100),
+            Math.floor(Math.random()*100%100),
+            Math.floor(Math.random()*100%100)
+            ]
+        }
+        // #endregion
+
+        // #region 动态数据
+        setInterval(() => {
+            var date = new Date()
+            var hours = date.getHours()
+            var minutes = date.getMinutes()
+            var seconds = date.getSeconds()
+            var time = ""
+            var data = setSaleData()
+
+            if(hours < 10) hours = "0" + hours
+            if(minutes < 10) minutes = "0" + minutes
+            if(seconds < 10) seconds = "0" + seconds
+            time = hours + ":" + minutes + ":" + seconds
+
+            barOptions.xAxis.name = time,
+            barOptions.series[0].data = data
+            // barOptions.series[1].data = data
+
+            pieOptions.series.data = [
+                    {name: "苹果", value: data[0]},
+                    {name: "香蕉", value: data[1]},
+                    {name: "草莓", value: data[2]},
+                    {name: "梨", value: data[3]},
+                    {name: "橘子", value: data[4]},
+                    {name: "菠萝", value: data[5]}
+            ]
+
+            // 数据渲染
+            barCharts.setOption(barOptions)
+            pieCharts.setOption(pieOptions)
+        }, 1100);
+        // #region
+
+
+    </script>
+</body>
+</html>

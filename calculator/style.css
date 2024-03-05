@@ -1,0 +1,164 @@
+:root {
+    --bg-color-1: #4E3AA4;
+    --bg-color-2: #D0399E;
+    --bg-color: #fff;
+    --display-color: #0a1e23;
+    --clear-color: #fc4552;
+    --clear-bgcolor: #ffd5d8;
+    --number-color: #000;
+    --number-bgcolor: #c3eaff;
+    --operator-color: #f967f3;
+    --operator-bgcolor: #ffd0fd;
+    --equal-color: #000;
+    --equal-bgcolor: #adf9e7;
+    --dark-bg-color: #071115;
+    --dark-display-color: #f8fafd;
+    --dark-clear-color: #bd3740;
+    --dark-clear-bgcolor: #2d191e;
+    --dark-number-color: #f8fafb;
+    --dark-number-bgcolor: #1b2f38;
+    --dark-operator-color: #aa00a4;
+    --dark-operator-bgcolor: #2e1f39;
+    --dark-equal-color: #fff;
+    --dark-equal-bgcolor: #223323;
+    --dark-display-color: #fff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(to right bottom, var(--bg-color-1), var(--bg-color-2));
+    user-select: none;
+}
+
+.calculator {
+    width: 15.25rem;
+    height: 26.25rem;
+    border-radius: .6rem;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 75%);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.display-area {
+    height: 33.33%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.display-area .toggle-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.display-area .display {
+    width: 90%;
+    height: 50px;
+    font-size: 20px;
+    text-align: end;
+    border: none;
+    background-color: transparent;
+    padding: 0 5%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    outline: none;
+}
+
+.btn-area {
+    width: 95%;
+    height: 66.667%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.btn-area tr {
+    height: 20%;
+    text-align: center;
+}
+.btn-area tr td {
+    width: 25%;
+}
+.btn-area tr td button {
+    width: 85%;
+    height: 85%;
+    font-size: 17px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 100ms linear;
+}
+.btn-area tr td button#equals{
+    border-radius: 30px;
+}
+.btn-area tr td button:hover {
+    transform: scale(1.1);
+}
+
+/* bright-theme */
+.calculator {
+    background-color: var(--bg-color);
+}
+
+.display-area .toggle-btn {
+    background-color: var(--display-color);
+}
+
+.btn-area .btn-operator {
+    color: var(--operator-color);   
+    background-color: var(--operator-bgcolor);   
+}
+.btn-area .btn-operator#equals {
+    color: var(--equal-color);   
+    background-color: var(--equal-bgcolor); 
+}
+.btn-area .btn-operator#clear {
+    color: var(--clear-color);
+    background-color: var(--clear-bgcolor);
+}
+.btn-area .btn-number {
+    color: var(--number-color);
+    background-color: var(--number-bgcolor);
+}
+
+/* dark-theme */
+.calculator.dark {
+    background-color: var(--dark-bg-color);
+}
+
+.calculator.dark .display-area .toggle-btn {
+    background-color: var(--dark-display-color);
+}
+.calculator.dark .display-area .display {
+    color: var(--dark-display-color);
+}
+
+.calculator.dark .btn-area .btn-operator {
+    color: var(--dark-operator-color);   
+    background-color: var(--dark-operator-bgcolor);   
+}
+.calculator.dark .btn-area .btn-operator#equals {
+    color: var(--dark-equal-color);   
+    background-color: var(--dark-equal-bgcolor); 
+}
+.calculator.dark .btn-area .btn-operator#clear {
+    color: var(--dark-clear-color);
+    background-color: var(--dark-clear-bgcolor);
+}
+.calculator.dark .btn-area .btn-number {
+    color: var(--dark-number-color);
+    background-color: var(--dark-number-bgcolor);
+}

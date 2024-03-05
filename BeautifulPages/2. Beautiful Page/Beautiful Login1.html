@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Login1</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+        }
+        body {
+            background-image: linear-gradient(to right, rgb(251, 194, 235), rgb(166, 193, 238));
+        }
+        .container {
+            width: 37rem;
+            height: 47rem;
+            text-align: center;
+            margin: 6.5rem auto;
+            overflow: hidden;
+        }
+        .overlay {
+            width: inherit;
+            height: inherit;
+            background: inherit;
+            border-radius: 30px;
+            position: absolute;
+            overflow: hidden;
+        }
+        .overlay::before {
+            content: "";
+            background: inherit;
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            bottom: -20px;
+            left: -20px;
+            z-index: -1;
+            box-shadow: inset 0 0 0 3000px rgba(255,255,255,.4);
+            filter: blur(20px);
+        }
+        h1 {
+            font-size: 50px;
+            padding-top: 5rem;
+        }
+        form {
+            width: 80%;
+            margin: 100px auto;
+            margin-bottom: 40px;
+            font-size: 60px;
+        }
+        .input {
+            width: 98%;
+            font-size: 19px;
+            border: none;
+            border-bottom: 1px solid #000;
+            padding: 10px;
+            padding-right: 0;
+            outline: none;
+            background-color: transparent;
+        }
+        .submit {
+            width: 100%;
+            height: 50px;
+            color: #fff;
+            font-size: 20px;
+            background-image: linear-gradient(to left, rgb(251, 194, 235), rgb(166, 193, 238));
+            border: none;
+            margin-top: 55px;
+            cursor: pointer;
+        }
+        span {
+            font-size: 20px;
+        }
+        a {
+            color:rgb(131, 170, 238)
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay">
+            <h1>Login</h1>
+            <form action="#">
+                <input class="input username" type="text" placeholder="username">
+                <input class="input password" type="password" placeholder="password">
+                <input class="submit" type="submit" value="Login">
+            </form>
+            <span>Don't have account? <a href="javascript:;">Sign up</a></span>
+        </div>
+    </div>
+</body>
+</html>

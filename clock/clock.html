@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <style>
+        .container {
+            width: 400px;
+            margin: 100px auto;
+            position: relative;
+        }
+        img {
+            width: 400px;
+        }
+        .hour-wrapper {
+            width: 180px;
+            height: 180px;
+            position: absolute;
+            top: 110px;
+            left: 110px;
+        }
+        .hour {
+            width: 6px;
+            height: 90px;
+            position: absolute;
+            left: 88px;
+            background-color: #000;
+        }
+        .minute-wrapper {
+            width: 280px;
+            height: 280px;
+            position: absolute;
+            top: 60px;
+            left: 60px;
+        }
+        .minute {
+            width: 4px;
+            height: 140px;
+            background-color: #000;
+            position: absolute;
+            left: 138px;
+        }
+        .second-wrapper {
+            width: 360px;
+            height: 360px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .second {
+            width: 2px;
+            height: 180px;
+            background-color: #000;
+            position: absolute;
+            left: 176px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./clock.jpg" alt="小熊维尼" title="小熊维尼">
+        <div class="hour-wrapper">
+            <div class="hour"></div>
+        </div>
+        <div class="minute-wrapper">
+            <div class="minute"></div>
+        </div>
+        <div class="second-wrapper">
+            <div class="second"></div>
+        </div>
+    </div>
+
+    <script>
+        let date = null
+        let hour = null
+        let hourDeg = null
+        let minuteDeg = null
+        let secondDeg = null
+        let hourArrow = document.querySelector(".hour-wrapper")
+        let minuteArrow = document.querySelector(".minute-wrapper")
+        let secondArrow = document.querySelector(".second-wrapper")
+
+        setInterval(() => {
+            date = new Date()
+            secondDeg = date.getSeconds() * 6
+            minute = date.getMinutes()
+            minuteDeg = minute * 6
+            hour = date.getHours()
+            if(hour > 12) hour -= 12
+            secondArrow.style.transform = `rotate(${secondDeg}deg)`
+            minuteArrow.style.transform = `rotate(${minuteDeg}deg)`
+            hourArrow.style.transform = `rotate(${minuteDeg*0.083 + hour*30}deg)`
+        }, 1000);
+
+
+    </script>
+</body>
+</html>

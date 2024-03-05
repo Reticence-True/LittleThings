@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Login2</title>
+    <style>
+        html {
+            font-size: 15px;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: rgb(24, 36, 56);
+        }
+        .container {
+            width: 35rem;
+            height: 35rem;
+            text-align: center;
+            background-color: rgb(15, 24, 35);
+            border: 1px solid transparent;
+            margin: 14rem auto;
+        }
+        h1 {
+            color: #fff;
+            margin-top: 50px;
+        }
+        form {
+            width: 80%;
+            margin: 80px auto;
+        }
+        .item {
+            position: relative;
+            padding-top: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        input {
+            width: 98%;
+            font-size: 20px;
+            color: #fff;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #fff;
+            padding-left: 10px;
+            outline: none;
+        }
+        label {
+            color: rgb(3,232,243);
+            font-size: 20px;
+            position: absolute;
+            top: 12px;
+            left: 10px;
+            transition: all .3s linear;
+            cursor: text;
+        }
+        input:focus+label,
+        input:valid+label{
+            font-size: 13px;
+            top: 0;
+        }
+        .submit {
+            width: 130px;
+            height: 50px;
+            color: rgb(3,232,243);
+            font-size: 18px;
+            background: transparent;
+            border: none;
+            position: relative;
+            margin-top: 50px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .submit:hover {
+            border-radius: 5px;
+			color: #fff;
+			background: #03e9f4;
+			box-shadow: 0 0 5px 0 #03e9f4,
+				0 0 25px 0 #03e9f4,
+				0 0 50px 0 #03e9f4,
+				0 0 100px 0 #03e9f4;
+			transition: all 1s linear;
+        }
+        .submit span{
+            position: absolute;
+            display: inline-block;
+        }
+        .submit span:nth-child(1){
+            width: 100%;
+            height: 2px;
+            background-image: linear-gradient(to left, transparent, #03e9f4);
+            left: 100%;
+            bottom: 0;
+            animation: lineBottom 1s linear infinite;
+        }
+        @keyframes lineBottom {
+            50%, 100%{
+                left: -100%;
+            }
+        }
+        .submit span:nth-child(2){
+            width: 2px;
+            height: 100%;
+            background-image: linear-gradient(to top, transparent, #03e9f4);
+            top: 100%;
+            left: 0;
+            animation: lineLeft 1s .2s linear infinite;
+        }
+        @keyframes lineLeft {
+            50%, 100% {
+                top: -100%;
+            }
+        }
+        .submit span:nth-child(3){
+            width: 100%;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, #03e9f4);
+            top: 0;
+            right: 100%;
+            animation: lineTop 1s .2s linear infinite;
+        }
+        @keyframes lineTop {
+            50%, 100%{
+                right: -100%;
+            }
+        }
+        .submit span:nth-child(4){
+            width: 2px;
+            height: 100%;
+            background-image: linear-gradient(to bottom, transparent, #03e9f4);
+            bottom: 100%;
+            right: 0;
+            animation: lineRight 1s .4s linear infinite
+        }
+        @keyframes lineRight {
+            50%, 100%{
+                bottom: -100%;
+            }
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="#">
+            <div class="item">
+                <input type="text" id="username" autocomplete="off" required>
+                <label for="username">username</label>
+            </div>
+            <div class="item">
+                <input type="password" id="password" autocomplete="off" required>
+                <label for="password">password</label>
+            </div>
+            <button class="submit">SUBMIT
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </form>
+    </div>
+</body>
+</html>

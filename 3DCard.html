@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3DCard</title>
+    <style>
+        .title {
+            text-align: center;
+            color: orangered;
+            user-select: none;
+        }
+
+        table {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        tr {
+            display: flex;
+            justify-content: space-around;
+            transform-style: preserve-3d;
+        }
+
+        .card {
+            width: 126px;
+            height: 131px;
+            background: #fff;
+            box-shadow: 40px 40px 40px rgba(0, 0, 0, .5);
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .image {
+            height: inherit;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        .overlay {
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            top: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">成就榜</h1>
+        <table>
+            <tr>
+                <td>
+                    <div class="card">
+                        <div class="image"></div>
+                        <div class="overlay"></div>
+
+                    </div>
+                </td>
+                <td>
+                    <div class="card">
+                        <div class="image"></div>
+                        <div class="overlay"></div>
+
+                    </div>
+                </td>
+                <td>
+                    <div class="card">
+                        <div class="image"></div>
+                        <div class="overlay"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script>
+        const bgImgList = ["./assets/images/温泉成就1.png", "./assets/images/温泉成就2.png", "./assets/images/温泉成就3.png"]
+        const cards = document.querySelectorAll(".card")
+        // 图片层
+        const image = document.querySelectorAll(".image")
+        // 遮盖层
+        const overlays = document.querySelectorAll(".overlay")
+        // 速度
+        const speed = 3
+
+        // 设置背景
+        for (let i = 0; i < image.length; i++){
+            image[i].style.backgroundImage = `url(${bgImgList[i]})`
+        }
+
+        function cardMouseEvent(obj, mClientX, mClientY){
+            let card = obj[0]
+            let overlay = obj[1]
+            let item = card.getClientRects()[0]
+            /* 中心点坐标与当前鼠标的距离，速度调整角度大小 */
+            let degX = (mClientY - item.y - item.height/2)/speed
+            let degY = (mClientX - item.x - item.width/2) * (-1) /speed
+            card.style.transform = `scale(1.8) rotateX(${degX}deg) rotateY(${degY}deg)`
+
+            /* 遮盖层 */
+            let opacity = 0.35/item.height * (mClientY - item.y)
+            overlay.style.background = `rgba(0, 0, 0, ${opacity})`
+        }
+
+        function overlayMouseEvent(obj, mClientX, mClientY){
+
+        }
+
+        // 卡片跟随鼠标事件
+        cards.forEach(i => {
+            i.addEventListener("mousemove", function(e){
+                window.requestAnimationFrame(() => {
+                    /* 传入鼠标坐标 */
+                    cardMouseEvent([i, i.children[1]], e.clientX, e.clientY)
+                })
+            })
+            i.addEventListener("mouseleave", function(){
+                this.removeAttribute("style")
+                this.children[1].removeAttribute("style")
+            })
+        })
+
+    </script>
+</body>
+
+</html>

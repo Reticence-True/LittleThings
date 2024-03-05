@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index-echats</title>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+        <div id="bar" style="width: 600px; height: 400px;"></div>
+        <div id="pie" style="width: 600px; height: 400px;"></div>
+    <script>
+        
+        // #region 柱状图
+        var barData = []
+        var barSeriesData = []
+        // 基于准备好的dom，初始化echarts实例
+        var barChart = echarts.init(document.getElementById('bar'));
+
+        // 指定图表的配置项和数据
+        var barOption = {
+            title: {
+                text: "销量"
+            },
+            tooltip: {},
+            legend: {
+                data: ["瞬时销量（件）"]
+            },
+            xAxis: {
+                data: barData
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: "瞬时销量（件）",
+                    type: "bar",
+                    data: barSeriesData,
+                    label: {
+                        show: true,
+                        position: "top"
+                    }
+                }
+            ]
+        }
+        // #endregion
+
+        // #region 饼状图
+        function pieSeriesData(){
+            return [
+                    {
+                        value: Math.floor(Math.random()*100%100),
+                        name: "苹果"
+                    },
+                    {
+                        value: Math.floor(Math.random()*100%100),
+                        name: "橘子"
+                    },
+                    {
+                        value: Math.floor(Math.random()*100%100),
+                        name: "香蕉"
+                    },
+                    {
+                        value: Math.floor(Math.random()*100%100),
+                        name: "梨"
+                    }
+                ]
+        }
+
+        var pieChart = echarts.init(document.getElementById("pie"))
+        // #endregion
+
+        // #region bar
+        var tTimestamp = Date.now()/1000
+
+        setInterval(() => {
+            var date = new Date();
+            var chours = date.getHours()
+            var cminutes = date.getMinutes()
+            var cseconds = date.getSeconds()+1
+            var Timestamp = Date.now()/1000
+
+            if(chours < 10) chours = "0" + chours
+            if(cminutes < 10) cminutes = "0" + cminutes
+            if(cseconds < 10) cseconds = "0" + cseconds
+            barData.push(chours + ":" + cminutes + ":" + cseconds)
+
+            var barSeriesDatus = Math.floor(Math.random()*100%100)
+            barSeriesData.push(barSeriesDatus)
+
+            if(Timestamp - tTimestamp >= 7){
+                barData.shift()
+                barSeriesData.shift()
+            }
+
+            // 使用刚指定的配置项和数据显示图表。
+            barChart.setOption(barOption);
+        }, 1000);
+        // #endregion
+
+        // #region pie
+        setInterval(() => {
+            pieChart.setOption({
+            title: {
+                text: "销量"
+            },
+            tooltip: {},
+            series: {
+                type: "pie",
+                data: pieSeriesData()
+            }
+        })
+        }, 2000);
+        // #endregion
+
+    </script>
+</body>
+</html>
