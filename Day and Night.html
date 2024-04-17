@@ -63,24 +63,19 @@
         }
         
         /* 白天 */
-        .day .sun-box {
-            opacity: 100%;
-        }
-        .day .moon-box {
-            opacity: 0;
-        }
         .day .background {
             background: #ffeea2;
         }
         /* 夜晚 */
-        .night .sun-box {
-            opacity: 0;
-        }
-        .night .moon-box {
-            opacity: 100%;
-        }
         .night .background {
             background: #040720;
+        }
+        /* 过渡效果 */
+        .sun-box {
+            opacity: var(--sun-opacity, 100%);
+        }
+        .moon-box {
+            opacity: var(--moon-opacity, 0%);
         }
 
         /* 按钮样式 */
@@ -122,6 +117,8 @@
     <script>
         const switcher = document.querySelector(".switch-btn")
         const container = document.querySelector("#container")
+        const sunBox = document.querySelector('.sun-box')
+        const moonBox = document.querySelector('.moon-box')
 
         let cycleFunction = function(){
             // true 代表白天，false 代表黑夜
@@ -130,6 +127,8 @@
                 if(cycle){
                     // 改变为黑天
                     container.setAttribute("class", "night")
+                    sunBox.style.setProperty('--sun-opacity', '0%')
+                    moonBox.style.setProperty('--moon-opacity', '100%')
                     // 改变图标为太阳
                     switcher.children[0].style.display = "none"
                     switcher.children[1].style.display = "block"
@@ -137,6 +136,8 @@
                 else {
                     // 改变为白天
                     container.setAttribute("class", "day")
+                    sunBox.style.setProperty('--sun-opacity', '100%')
+                    moonBox.style.setProperty('--moon-opacity', '0%')
                     // 改变图标为月亮
                     switcher.children[0].style.display = "block"
                     switcher.children[1].style.display = "none"

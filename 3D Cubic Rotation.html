@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D</title>
     <style>
+        body {
+            width: 100%;
+            height: 100vh;
+        }
         .container {
             /* 对父元素开启preserve-3d，使得其子元素可以3d变形 */
             transform-style: preserve-3d;
             animation: Float 2.5s ease-in-out infinite;
         }
         .rotation {
-            width: 600px;
-            height: 600px;
-            margin: 100px auto;
             /* 对父元素开启preserve-3d，使得其子元素可以3d变形 */
             transform-style: preserve-3d;
-            animation: Rotation 15s linear infinite;
+            animation: Rotation linear infinite;
+            animation-duration: var(--dura, 15s);
         }
         .box {
             width: 100px;
@@ -99,27 +101,25 @@
             <div class="box box6" style="background-color: #ffc0cb90;"></div>
         </div>
     </div>
-    <h1>LENOVO</h1>
+    <h1>DELL</h1>
 
     <script>
         let range = document.querySelectorAll(".speed")[1]
         let box = document.querySelector(".rotation")
 
         range.addEventListener("mousedown", function(){
-            this.addEventListener("mousemove", function(){
-                // console.log(this.value)
-                box.style.animationDuration = 30-this.value+1+"s"
-            })
+            box.style.animationPlayState = 'paused'
         })
         range.addEventListener("mouseup", function(){
-            box.style.animationDuration = 30-this.value+1+"s"
+            box.style.animationPlayState = 'running'
+            box.style.setProperty('--dura', `${30-this.value+1}s`)
         })
 
-        document.styleSheets[0].cssRules[9][1].cssText = `100%{
-                transform: rotateX(-33.5deg) rotateY(3600deg)
-            }`
+        // document.styleSheets[0].cssRules[9][1].cssText = `100%{
+        //         transform: rotateX(-33.5deg) rotateY(3600deg)
+        //     }`
         
-        console.log(document.styleSheets[0].cssRules[9][1].cssText)
+        // console.log(document.styleSheets[0].cssRules[9][1].cssText)
 
     </script>
 </body>
